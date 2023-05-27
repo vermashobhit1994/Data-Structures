@@ -21,8 +21,9 @@ void create_menu (void)
 	
 	fputs("\n\n1. CREATE SINGLE LINKED LIST\n"
 	        "2. DISPLAY SINGLE LINKED LIST\n"
-			"3. FREQUENCY OF ITEM \n",
-			"4. EXIT\n\n", stdout);
+			"3. FREQUENCY OF ITEM \n"
+			"4. FIND LARGEST AND SMALLEST ITEM\n"
+			"5. EXIT\n\n", stdout);
 }
 
 
@@ -111,6 +112,8 @@ int main()
 	
 	int choice = 0;
 		
+	int item = 0;
+	int freq_item = 0;
 	
 	while(1)
 	{
@@ -121,11 +124,17 @@ int main()
 		
 		if ( (err_status = input_data(&choice)) == STATUS_SUCCESS)
 		{
-			printf("choice : %d\n", choice);
+			
 			switch(choice)
 			{
 				case 1:
-					if ( (err_status = create_single_linked_list(&pHead, &pLast, 12)) != STATUS_SUCCESS)
+					printf("Enter the item :    ");
+					if ( (err_status = input_data(&item)) == STATUS_SUCCESS)
+					{
+						if ( (err_status = create_single_linked_list(&pHead, &pLast, item)) != STATUS_SUCCESS)
+							printf("%s\n", ErrorMsg[err_status]);
+					}
+					else
 						printf("%s\n", ErrorMsg[err_status]);
 					break;
 				case 2:
@@ -133,8 +142,19 @@ int main()
 						printf("%s\n", ErrorMsg[err_status]);
 					break;
 				case 3:
+					printf("enter item to be find : ");
+					if ( (err_status = input_data(&item)) == STATUS_SUCCESS)
+					{
+						if ((err_status = frequency_item_single_linked_list(pHead, item, &freq_item)) != STATUS_SUCCESS)
+							printf("%s\n", ErrorMsg[err_status]);
+						else
+							printf("%d element occur %d times \n", item, freq_item);
+					
+					}
 					break;
 				case 4:
+					break;
+				case 5:
 					exit(0);
 				default:
 					printf("invalid choice \n");

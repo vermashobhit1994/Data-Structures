@@ -34,6 +34,7 @@ RETURN_STATUS create_single_linked_list( S_List_Node** pHead, S_List_Node** pLas
 
 RETURN_STATUS display_single_linked_list(const S_List_Node *pHead);
 
+RETURN_STATUS frequency_item_single_linked_list(const S_List_Node *pHead, const int searchItem, int* freqSearchItem);
 
 
 #endif 
